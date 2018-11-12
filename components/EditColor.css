@@ -1,0 +1,28 @@
+.scale-enter{
+    transform: scale(0);
+}
+.scale-enter-active{
+    animation: scale-in 600ms ease-out forwards;
+}
+.scale-leave{
+    transform: scale(1);
+}
+.scale-leave-active{
+    animation: scale-out 600ms ease-out forwards;
+}
+@keyframes scale-in {
+    from{
+        transform: scale(0);
+    }
+    to{
+        transform: scale(1);
+    }
+}
+@keyframes scale-out {
+    from{
+        transform: scale(1);
+    }
+    to{
+        transform: scale(0);
+    }
+}

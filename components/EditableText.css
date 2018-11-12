@@ -1,0 +1,20 @@
+﻿.wrapperInline {
+  width: 300px;
+}
+.slide-enter{
+  transform: scaleX(0);
+}
+.slide-enter-active{
+  animation: slide-in 600ms ease-out forwards;
+}
+.slide-leave{
+  display: none;
+}
+@keyframes slide-in {
+  from{
+    transform: scaleX(0);
+  }
+  to{
+    transform: scaleX(1);
+  }
+}
