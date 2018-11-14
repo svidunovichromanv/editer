@@ -28,7 +28,6 @@ class EditableText extends React.PureComponent {
     };
 
     recordNewColor = (e) => {
-        console.log(e +"2");
         this.setState({color: e});
     };
 
@@ -51,11 +50,12 @@ class EditableText extends React.PureComponent {
 
     render() {
         const textStyle = {
+            position: "relative",
             fontSize: this.state.size + "px",
             fontFamily: this.state.font,
             textAlign: this.state.align,
             color: this.state.color,
-            marginTop: this.state.position.top,
+            top: this.state.position.top,
             width: this.state.position.width,
             height: this.state.position.height,
             marginLeft: this.state.position.left,
@@ -86,13 +86,7 @@ class EditableText extends React.PureComponent {
 
         }
 
-        return <ReactCSSTransitionGroup
-            transitionName="slide"
-            transitionEnterTimeout={600}
-            transitionLeaveTimeout={600}
-        >
-            {renderData}
-        </ReactCSSTransitionGroup>;
+        return renderData;
     };
 
 }

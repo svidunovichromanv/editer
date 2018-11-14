@@ -19,7 +19,7 @@ class EditText extends React.PureComponent {
         cbRecordNewAlign: PropTypes.func.isRequired,
         color: PropTypes.string.isRequired,
         cbRecordNewColor: PropTypes.func.isRequired,
-        position: PropTypes.string.isRequired,
+        position: PropTypes.object.isRequired,
         cbRecordNewPosition:PropTypes.func.isRequired,
     };
 
@@ -77,7 +77,8 @@ class EditText extends React.PureComponent {
 
     render() {
         const position={
-            marginTop: this.props.position.top,
+            position: "relative",
+            top: this.props.position.top,
             width: this.props.position.width,
             height: this.props.position.height,
             marginLeft: this.props.position.left,
@@ -128,6 +129,10 @@ class EditText extends React.PureComponent {
                     <option value="inherit">inherit</option>
                 </select>
             </div>
+            <button onClick={this.editColor}>Edit color</button>
+            <button onClick={this.editPosition}>Edit position</button>
+            <input style={textStyle} defaultValue={this.props.text} onChange={this.recordNewText}/>
+
             <ReactCSSTransitionGroup
                 transitionName="scale"
                 transitionEnterTimeout={600}
@@ -138,11 +143,8 @@ class EditText extends React.PureComponent {
                 {this.state.editPosition?<EditPosition key="4" cbEditPosition={this.setPosition} position={this.props.position}/>:null}
 
             </ReactCSSTransitionGroup>
-            <button onClick={this.editColor}>Edit color</button>
 
-            <button onClick={this.editPosition}>Edit position</button>
 
-            <input style={textStyle} defaultValue={this.props.text} onChange={this.recordNewText}/>
         </div>
     }
 }

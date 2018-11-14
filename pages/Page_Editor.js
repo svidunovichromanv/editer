@@ -6,7 +6,7 @@ class Page_About extends React.PureComponent {
     render() {
 
         return (
-                <EditableText/>
+                <div style={{width:"100%", height:"50vh", backgroundColor:"rgba(55,55,55,.7)"}}><EditableText/></div>
 
         );
 

@@ -5,32 +5,44 @@ import './ModalWindow.css';
 class EditPosition extends React.PureComponent {
     static propTypes = {
         cbEditPosition: PropTypes.func.isRequired,
-        position: PropTypes.string.isRequired,
+        position: PropTypes.object.isRequired,
     };
     state = {
-        top: this.props.top,
-        left: this.props.left,
-        width: this.props.width,
-        height: this.props.height
+        top: this.props.position.top,
+        left: this.props.position.left,
+        width: this.props.position.width,
+        height: this.props.position.height
     };
 
     recordNewTop = (e) => {
-        let top = e.target.value;
-        this.setState({top: top});
+        let top = +e.target.value;
+        let height = +this.state.height.slice(0,-1);
+        if (top+height<=100){
+            this.setState({top: top+"%"});
+        }
     };
     recordNewWidth = (e) => {
-        let width = e.target.value;
-        this.setState({width: width});
+        let width = +e.target.value;
+        let left = +this.state.left.slice(0,-1);
+        if (width+left<=100){
+            this.setState({width: width+"%"});
+        }
     };
     recordNewHeight = (e) => {
-        let height = e.target.value;
-        this.setState({height: height});
+        let height = +e.target.value;
+        let top = +this.state.top.slice(0,-1);
+        if (height+top<=100){
+            this.setState({height: height+"%"});
+        }
     };
     recordNewLeft = (e) => {
-        let left = e.target.value;
-        this.setState({left: left});
+        let left = +e.target.value;
+        let width = +this.state.width.slice(0,-1);
+        if (left+width<=100){
+            this.setState({left: left+"%"});
+        }
     };
-    editPositio = (e) => {
+    editPosition = (e) => {
         e.preventDefault();
         const position={
             left: this.state.left,
@@ -43,14 +55,15 @@ class EditPosition extends React.PureComponent {
 
     render() {
         const containerStyle = {
-            marginLeft: "35%",
+            marginLeft: "20%",
             border: "solid black 1px",
             width: "60%",
             height: "300px",
         };
         const elementStyle = {
+            position: "relative",
             marginLeft: this.state.left,
-            marginTop: this.state.top,
+            top: this.state.top,
             width: this.state.width,
             height: this.state.height,
             backgroundColor: "grey",
@@ -73,8 +86,8 @@ class EditPosition extends React.PureComponent {
                         <input style={formStyle}
                                type="range"
                                min="0"
-                               max="100%"
-                               defaultValue={this.state.top}
+                               max="100"
+                               defaultValue={this.state.top.slice(0,-1)}
                                onChange={this.recordNewTop}/>
                         {this.state.top}
                     </label><br/>
@@ -83,8 +96,8 @@ class EditPosition extends React.PureComponent {
                         <input style={formStyle}
                                type="range"
                                min="0"
-                               max="100%"
-                               defaultValue={this.state.left}
+                               max="100"
+                               defaultValue={this.state.left.slice(0,-1)}
                                onChange={this.recordNewLeft}/>
                         {this.state.left}
                     </label><br/>
@@ -93,8 +106,8 @@ class EditPosition extends React.PureComponent {
                         <input style={formStyle}
                                type="range"
                                min="0"
-                               max="100%"
-                               defaultValue={this.state.width}
+                               max="100"
+                               defaultValue={this.state.width.slice(0,-1)}
                                onChange={this.recordNewWidth}/>
                         {this.state.width}
                     </label><br/>
@@ -103,8 +116,8 @@ class EditPosition extends React.PureComponent {
                         <input style={formStyle}
                                type="range"
                                min="0"
-                               max="100%"
-                               defaultValue={this.state.height}
+                               max="100"
+                               defaultValue={this.state.height.slice(0,-1)}
                                onChange={this.recordNewHeight}/>
                         {this.state.height}
                     </label><br/>
