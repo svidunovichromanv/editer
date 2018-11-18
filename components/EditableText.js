@@ -4,11 +4,13 @@ import EditText from './EditText';
 import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import './EditableText.css';
 
-class EditableText extends React.PureComponent {
+import {connect} from 'react-redux';
+import { text_create, textContent_edit } from '../redux/textsAC';
 
+class EditableText extends React.PureComponent {
     state = {
         editState: false,
-        text: "Header",
+        //text: "Header",
         size: "20",
         font: "Times New Roman",
         align: "center",
@@ -18,8 +20,18 @@ class EditableText extends React.PureComponent {
             width: "80%",
             top: "10%",
             height: "10%"
-        }
+        },
+        backgroundColor: "rgb(155, 175, 145)",
+        border: "4px double black",
+        borderRadius: "4px"//https://drive.google.com/open?id=1n6cE_3AEble0Gt1akXFBAv4_-v8RE1TJ
     };
+
+    componentWillMount() {
+        // изначально счётчика с идентификатором counterid нет
+        // создадим
+        console.log("this.props.text");
+        this.props.dispatch( text_create(this.props.textid, this.props.text) );
+    }
 
     editText = () => {
         this.setState((prevState) => {
@@ -28,13 +40,13 @@ class EditableText extends React.PureComponent {
     };
 
     recordNewColor = (e) => {
+        console.log(e +"2");
         this.setState({color: e});
     };
-
     recordNewText = (e) => {
-        this.setState({text: e});
+        this.props.dispatch( textContent_edit(this.props.textid,e) );
+        //this.setState({text: e});
     };
-
     recordNewSize = (e) => {
         this.setState({size: e});
     };
@@ -49,6 +61,7 @@ class EditableText extends React.PureComponent {
     };
 
     render() {
+        const text=this.props.texts.texts[this.props.textid];
         const textStyle = {
             position: "relative",
             fontSize: this.state.size + "px",
@@ -63,7 +76,7 @@ class EditableText extends React.PureComponent {
         let renderData;
         if (!this.state.editState) {
             renderData = (
-                <div key="1" style={textStyle} onClick={this.editText}>{this.state.text}</div>
+                <div key="1" style={textStyle} onClick={this.editText}>{text}</div>
             );
         } else {
             renderData = (
@@ -72,7 +85,7 @@ class EditableText extends React.PureComponent {
                           cbRecordNewSize={this.recordNewSize}
                           font={this.state.font}
                           cbRecordNewFont={this.recordNewFont}
-                          text={this.state.text}
+                          text={text}
                           cbRecordNewText={this.recordNewText}
                           align={this.state.align}
                           cbRecordNewAlign={this.recordNewAlign}
@@ -86,9 +99,24 @@ class EditableText extends React.PureComponent {
 
         }
 
-        return renderData;
+        return <ReactCSSTransitionGroup
+            transitionName="slide"
+            transitionEnterTimeout={600}
+            transitionLeaveTimeout={600}
+        >
+            {renderData}
+        </ReactCSSTransitionGroup>;
     };
 
 }
 
-export default EditableText;
+const mapStateToProps = function (state) {
+    return {
+        // весь раздел Redux state под именем counters будет доступен
+        // данному компоненту как this.props.counters
+        texts: state.texts,
+    };
+};
+
+export default connect(mapStateToProps)(EditableText);
+

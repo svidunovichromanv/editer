@@ -86,7 +86,7 @@ class EditPosition extends React.PureComponent {
                         <input style={formStyle}
                                type="range"
                                min="0"
-                               max="100"
+                               max={100-(+this.state.height.slice(0,-1))}
                                defaultValue={this.state.top.slice(0,-1)}
                                onChange={this.recordNewTop}/>
                         {this.state.top}
@@ -96,7 +96,7 @@ class EditPosition extends React.PureComponent {
                         <input style={formStyle}
                                type="range"
                                min="0"
-                               max="100"
+                               max={100-(+this.state.width.slice(0,-1))}
                                defaultValue={this.state.left.slice(0,-1)}
                                onChange={this.recordNewLeft}/>
                         {this.state.left}
@@ -106,7 +106,7 @@ class EditPosition extends React.PureComponent {
                         <input style={formStyle}
                                type="range"
                                min="0"
-                               max="100"
+                               max={100-(+this.state.left.slice(0,-1))}
                                defaultValue={this.state.width.slice(0,-1)}
                                onChange={this.recordNewWidth}/>
                         {this.state.width}
@@ -116,7 +116,7 @@ class EditPosition extends React.PureComponent {
                         <input style={formStyle}
                                type="range"
                                min="0"
-                               max="100"
+                               max={100-(+this.state.top.slice(0,-1))}
                                defaultValue={this.state.height.slice(0,-1)}
                                onChange={this.recordNewHeight}/>
                         {this.state.height}
