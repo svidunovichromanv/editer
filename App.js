@@ -1,14 +1,15 @@
 ﻿"use strict";
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore} from 'redux';
+import { createStore, combineReducers } from 'redux';
 
 import PagesRouter from './pages/PagesRouter';
 import PagesLinks from './pages/PagesLinks';
 import './main.css';
+//import counterReducer from "./counterReducer";
 import combinedReducer from './redux/reducers.js';
 
 let store=createStore(combinedReducer);
@@ -20,8 +21,10 @@ let store=createStore(combinedReducer);
 ReactDOM.render(
     <BrowserRouter>
         <Provider store={store}>
-            <PagesLinks />
-            <PagesRouter />
+            <Fragment>
+                <PagesLinks />
+                <PagesRouter />
+            </Fragment>
         </Provider>
     </BrowserRouter>
 , document.getElementById('container') );

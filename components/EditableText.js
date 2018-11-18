@@ -10,7 +10,6 @@ import { text_create, textContent_edit } from '../redux/textsAC';
 class EditableText extends React.PureComponent {
     state = {
         editState: false,
-        //text: "Header",
         size: "20",
         font: "Times New Roman",
         align: "center",
@@ -30,7 +29,7 @@ class EditableText extends React.PureComponent {
         // изначально счётчика с идентификатором counterid нет
         // создадим
         console.log("this.props.text");
-        this.props.dispatch( text_create(this.props.textid, this.props.text) );
+        this.props.dispatch( textContent_edit(this.props.textid, this.props.text) );
     }
 
     editText = () => {

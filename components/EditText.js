@@ -13,7 +13,7 @@ class EditText extends React.PureComponent {
         cbRecordNewSize: PropTypes.func.isRequired,
         font: PropTypes.string.isRequired,
         cbRecordNewFont: PropTypes.func.isRequired,
-        text: PropTypes.string.isRequired,
+        text: PropTypes.array.isRequired,
         cbRecordNewText: PropTypes.func.isRequired,
         align: PropTypes.string.isRequired,
         cbRecordNewAlign: PropTypes.func.isRequired,
